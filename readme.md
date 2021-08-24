@@ -37,7 +37,7 @@ The following instructions are for setting up a version of Amundsen using Docker
    ```
 
 ## 3. Populate DSE with data
-    ```bash
+   ```bash
    docker exec -it airfloworiginal_dse1_1 cqlsh
    ```
 
@@ -46,5 +46,4 @@ The following instructions are for setting up a version of Amundsen using Docker
  ```bash
    python cassandra_data_loader.py
    python cassaandra_no4j_es_loader.py 
-   ```
-   
+ ```
