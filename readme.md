@@ -35,4 +35,15 @@ The following instructions are for setting up a version of Amundsen using Docker
    docker-compose up airflow-init
    docker-compose up
    ```
-   
+
+## 3. Populate DSE with data
+    ```bash
+   docker exec -it airfloworiginal_dse1_1 cqlsh
+   ```
+
+## 4. Run the scripts to Extract and Publish    
+ Transfer the scripts into the /amundsen/databuilder/example/scripts
+ ```bash
+   python cassandra_data_loader.py
+   python cassaandra_no4j_es_loader.py 
+   ```
