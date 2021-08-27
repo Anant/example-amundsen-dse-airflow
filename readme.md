@@ -56,3 +56,11 @@ The following instructions are for setting up a version of Amundsen using Docker
    python cassandra_data_loader.py
    python cassaandra_no4j_es_loader.py 
  ```
+
+## 5. Install requirements  
+ In the airflow_worker install the dependencies
+ ```bash
+   cd dags/req
+   pip install -r requirements.txt
+   pip install cassandra-driver
+ ```
