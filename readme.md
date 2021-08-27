@@ -47,7 +47,7 @@ The following instructions are for setting up a version of Amundsen using Docker
    CREATE TABLE User_type(
    user_type INT,
    user_ID UUID,
-   primary key(user_type));
+   primary key(user_ID));
    ```   
 
 ## 4. Run the scripts to Extract and Publish    
@@ -63,4 +63,33 @@ The following instructions are for setting up a version of Amundsen using Docker
    cd dags/req
    pip install -r requirements.txt
    pip install cassandra-driver
+ ```
+
+## 6. Install requirements  
+ In the airflow_worker CLI install the dependencies
+ ```bash
+   cd dags/req
+   pip install -r requirements.txt
+   pip install cassandra-driver
+ ```
+## 6. Configure the DAG
+In the /dags/dag.py file you need to configure the connections for Cassandra/Neo4j and ES
+1. you should see the network
+ ```bash
+   docker network ls
+ ``` 
+ example:
+ Network ID   amundsen_amundsennet      bridge    local
+2. With this command you should be able to see all containers running on this network   
+ ```bash
+   docker network inspect amundsen_amundsennet
+ ```
+3. Get the IPv4Address for this 3 containers
+ DSE1
+ ```bash
+                "Name": "airfloworiginal_dse1_1",
+                "EndpointID": "3e3e13d95457c500dcf10660f0e9796b08dff4190f5893b3d1443dbff771a3f8",
+                "MacAddress": "02:42:ac:15:00:09",
+                "IPv4Address": "172.21.0.9/16",
+                "IPv6Address": ""        
  ```
