@@ -72,7 +72,7 @@ The following instructions are for setting up a version of Amundsen using Docker
    pip install -r requirements.txt
    pip install cassandra-driver
  ```
-## 6. Configure the DAG
+## 7. Configure the DAG
 In the /dags/dag.py file you need to configure the connections for Cassandra/Neo4j and ES
 1. you should see the network
  ```bash
@@ -84,7 +84,7 @@ In the /dags/dag.py file you need to configure the connections for Cassandra/Neo
  ```bash
    docker network inspect amundsen_amundsennet
  ```
-3. Get the IPv4Address for this 3 containers
+3. Get the IPv4Address for this 3 containers Example:
  ```bash
                 "Name": "airfloworiginal_dse1_1",
                 "EndpointID": "3e3e13d95457c500dcf10660f0e9796b08dff4190f5893b3d1443dbff771a3f8",
@@ -104,3 +104,17 @@ In the /dags/dag.py file you need to configure the connections for Cassandra/Neo
                 "IPv4Address": "172.21.0.3/16",
                 "IPv6Address": ""         
  ```
+## 8. Edit the dag file 
+Change the file on these 3 lines 
+ 1. On line 95:
+ ```bash
+   'extractor.cassandra.{}'.format(CassandraExtractor.IPS_KEY): ['172.21.0.9'],
+ ```
+ 2. On line 56:
+ ```bash
+   NEO4J_ENDPOINT = f'bolt://172.21.0.3:{neo_port}'
+ ```
+ 2. On line 51:
+ ```bash
+   {'host': '172.21.0.2', 'port': es_port},
+ ```   

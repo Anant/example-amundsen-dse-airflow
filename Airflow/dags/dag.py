@@ -21,6 +21,7 @@ from elasticsearch import Elasticsearch
 from pyhocon import ConfigFactory
 from sqlalchemy.ext.declarative import declarative_base
 
+from databuilder.extractor.neo4j_extractor import Neo4jExtractor
 from databuilder.extractor.cassandra_extractor import CassandraExtractor
 from databuilder.extractor.neo4j_search_data_extractor import Neo4jSearchDataExtractor
 from databuilder.job.job import DefaultJob
@@ -47,12 +48,12 @@ if len(sys.argv) > 2:
     neo_host = sys.argv[2]
 
 es = Elasticsearch([
-    {'host': es_host, 'port': es_port},
+    {'host': '172.21.0.2', 'port': es_port},
 ])
 
 Base = declarative_base()
 
-NEO4J_ENDPOINT = f'bolt://{neo_host}:{neo_port}'
+NEO4J_ENDPOINT = f'bolt://172.21.0.3:{neo_port}'
 
 neo4j_endpoint = NEO4J_ENDPOINT
 
@@ -91,7 +92,7 @@ def create_table_extract_job():
 
     job_config = ConfigFactory.from_dict({
     'extractor.cassandra.{}'.format(CassandraExtractor.CLUSTER_KEY): 'Test Cluster',
-    'extractor.cassandra.{}'.format(CassandraExtractor.IPS_KEY): ['127.0.0.1'],
+    'extractor.cassandra.{}'.format(CassandraExtractor.IPS_KEY): ['172.21.0.9'],
     'extractor.cassandra.{}'.format(CassandraExtractor.KWARGS_KEY): {'port': 9042},
     'extractor.cassandra.{}'.format(CassandraExtractor.FILTER_FUNCTION_KEY): None,
     'loader.filesystem_csv_neo4j.node_dir_path': node_files_folder,
@@ -112,7 +113,7 @@ def create_table_extract_job():
     job = DefaultJob(conf=job_config,
                task=task,
                publisher=Neo4jCsvPublisher()).launch()
-    job.launch()
+    
 
 def create_es_publisher_sample_job():
     # loader saves data to this location and publisher reads it from here
