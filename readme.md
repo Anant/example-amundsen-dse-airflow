@@ -85,11 +85,22 @@ In the /dags/dag.py file you need to configure the connections for Cassandra/Neo
    docker network inspect amundsen_amundsennet
  ```
 3. Get the IPv4Address for this 3 containers
- DSE1
  ```bash
                 "Name": "airfloworiginal_dse1_1",
                 "EndpointID": "3e3e13d95457c500dcf10660f0e9796b08dff4190f5893b3d1443dbff771a3f8",
                 "MacAddress": "02:42:ac:15:00:09",
                 "IPv4Address": "172.21.0.9/16",
-                "IPv6Address": ""        
+                "IPv6Address": "" 
+
+               "Name": "es_amundsen",
+                "EndpointID": "dfa0fc9580d97309516add337fc4b5aa1df8e8439b7e075c28c0d3d6a990a8c4",
+                "MacAddress": "02:42:ac:15:00:02",
+                "IPv4Address": "172.21.0.2/16",
+                "IPv6Address": ""
+
+               "Name": "neo4j_amundsen",
+                "EndpointID": "c044909c033c8f82172be6c265a70e0e077825fb1b01c960a9fd5d0373f9508f",
+                "MacAddress": "02:42:ac:15:00:03",
+                "IPv4Address": "172.21.0.3/16",
+                "IPv6Address": ""         
  ```
