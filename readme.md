@@ -58,21 +58,13 @@ The following instructions are for setting up a version of Amundsen using Docker
  ```
 
 ## 5. Install requirements  
- In the airflow_worker install the dependencies
- ```bash
-   cd dags/req
-   pip install -r requirements.txt
-   pip install cassandra-driver
- ```
-
-## 6. Install requirements  
  In the airflow_worker CLI install the dependencies
  ```bash
    cd dags/req
    pip install -r requirements.txt
    pip install cassandra-driver
  ```
-## 7. Configure the DAG
+## 6. Configure the DAG
 In the /dags/dag.py file you need to configure the connections for Cassandra/Neo4j and ES
 1. you should see the network
  ```bash
@@ -104,7 +96,7 @@ In the /dags/dag.py file you need to configure the connections for Cassandra/Neo
                 "IPv4Address": "172.21.0.3/16",
                 "IPv6Address": ""         
  ```
-## 8. Edit the dag file 
+## 7. Edit the DAG file 
 Change the file on these 3 lines 
  1. On line 95:
  ```bash
