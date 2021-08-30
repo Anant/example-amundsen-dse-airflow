@@ -37,7 +37,8 @@ The following instructions are for setting up a version of Amundsen using Docker
    docker-compose up
    ```
 
-## 3. Populate DSE with data
+## 3. Populate DSE/Postgres with data
+   Cassandra
    ```bash
    docker exec -it airfloworiginal_dse1_1 cqlsh
    ```
@@ -48,7 +49,23 @@ The following instructions are for setting up a version of Amundsen using Docker
    user_type INT,
    user_ID UUID,
    primary key(user_ID));
-   ```   
+   ```
+   Postgres
+   ```bash
+   docker exec -it airfloworiginal_postgres_1 psql -U airflow
+   ```
+   ```bash
+   \dt
+   CREATE TABLE accounts (
+	user_id serial PRIMARY KEY,
+	username VARCHAR ( 50 ) UNIQUE NOT NULL,
+	password VARCHAR ( 50 ) NOT NULL,
+	email VARCHAR ( 255 ) UNIQUE NOT NULL,
+	created_on TIMESTAMP NOT NULL,
+        last_login TIMESTAMP 
+  );  
+   ```         
+   
 
 ## 4. Run the scripts to Extract and Publish    
  Transfer the scripts into the /amundsen/databuilder/example/scripts
