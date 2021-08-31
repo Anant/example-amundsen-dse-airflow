@@ -133,6 +133,7 @@ def create_es_publisher_sample_job():
     elasticsearch_index_alias = 'table_search_index'
 
     job_config = ConfigFactory.from_dict({
+        'extractor.search_data.entity_type': 'table',
         f'extractor.search_data.extractor.neo4j.{Neo4jExtractor.GRAPH_URL_CONFIG_KEY}': neo4j_endpoint,
         f'extractor.search_data.extractor.neo4j.{Neo4jExtractor.MODEL_CLASS_CONFIG_KEY}':
             'databuilder.models.table_elasticsearch_document.TableESDocument',
